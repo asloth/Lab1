@@ -121,6 +121,8 @@ alter table movimiento alter column fecha set data type default current_date
 select numMovimiento from movimiento  order by numMovimiento limit 1
 --para poner la columna hora un tipo de dato  time with time zone
 ALTER TABLE movimiento alter column hora set data type time with time zone
+--para ingresar el registro 
+insert into movimiento values (DEFAULT, codusuario, CURRENT_DATE, true, CURRENT_TIME) ;
 
 
 
