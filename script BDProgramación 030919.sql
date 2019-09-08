@@ -113,7 +113,7 @@ estado Boolean not null);
 
 alter table MOVIMIENTO add constraint FK_MOV_USU foreign key (codUsuario) references USUARIO
 
-
+alter table movimiento add column hora time not null 
 
 
 

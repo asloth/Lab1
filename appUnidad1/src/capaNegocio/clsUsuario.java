@@ -3,7 +3,8 @@ package capaNegocio;
 
 import capaDatos.clsJDBC;
 import java.sql.*;
-import javax.swing.JOptionPane;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class clsUsuario {
     //Crear instancia de la clase clsJDBC
@@ -25,7 +26,7 @@ public class clsUsuario {
     }
     
     public Boolean validarVigencia(String usu) throws Exception{
-    strSQL = "select estado from usuario where nomusuario='" + usu + "'" ;
+        strSQL = "select estado from usuario where nomusuario='" + usu + "'" ;
         try {
             rs=objConectar.consultarBD(strSQL);
             while(rs.next()){
@@ -71,4 +72,40 @@ public class clsUsuario {
             throw new Exception("Error al cambiar la contraseña..");
         }
     }
+    //Calendar fecha = new GregorianCalendar();
+    //String fech = String.valueOf(fecha.get(Calendar.DAY_OF_MONTH)) +'/' +String.valueOf(fecha.get(Calendar.MONTH)+1)+'/'+String.valueOf(fecha.get(Calendar.YEAR));
+    public int conocerCodusuario (String user) throws Exception{
+        String data = "select codUsuario from usuario where nomusuario='"+user+"'";
+        try {
+            ResultSet resul = objConectar.consultarBD(data);
+            while (resul.next()) {
+                return resul.getInt("codUsuario");
+            }
+        } catch (Exception e) {
+            throw new Exception("Error al obtener el codigo de usuario");
+        }
+        return -1;
+    }
+   public void ingresarMovimiento (String user) throws Exception{
+        int coduser = conocerCodusuario(user);
+        int indice=-1;
+        if (coduser==-1) {
+           throw new Exception("Este usuario no existe");
+       }
+        strSQL = "insert into movimiento values (DEFAULT,"+coduser +", CURRENT_DATE, true, CURRENT_TIME) ";
+        String str = "select numMovimiento from movimiento order by numMovimiento limit 1";
+        try {
+            rs = objConectar.consultarBD(str);
+           while (rs.next()){
+               ResultSet index = objConectar.consultarBD("select max(numMovimiento) from movimiento");
+               while (index.next()){
+                   indice = index.getInt("max");
+               }
+               objConectar.ejecutarBD("update movimiento set estado=false where numMovimiento="+indice);
+           }
+           objConectar.ejecutarBD(strSQL);
+        } catch (Exception e) {
+            throw new Exception("Error al actualizar la tabla movimientos ");
+        }
+   }
 }

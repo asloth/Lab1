@@ -1,5 +1,5 @@
 /*03 Set 2019*/
-package appunidad1;
+package capaCliente;
 
 import capaNegocio.*;
 import javax.swing.JOptionPane;
@@ -209,7 +209,6 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
         String pregunta;
         try {
          
@@ -218,7 +217,6 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
                 nombreUsuario=objUsuario.login(txtUsuario.getText(),txtContraseña.getText());
                 if (nombreUsuario.equals("")){
                     JOptionPane.showMessageDialog(null,"Acceso incorrecto, intente nuevamente!!");
-                    //numIntentos=numIntentos+1;
                     numIntentos++;
                     if (numIntentos>=3){
                         JOptionPane.showMessageDialog(null,"Superó los tres intentos, responda pregunta secreta!");
@@ -227,6 +225,7 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
                         lblPregunta.setText(pregunta);
                     }
                 }else{
+                    objUsuario.ingresarMovimiento(txtUsuario.getText());
                     JOptionPane.showMessageDialog(null,nombreUsuario + ", Bienvenido al Sistema!");
                     this.dispose();
                 }  

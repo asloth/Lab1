@@ -3,23 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package appunidad1;
+package capaCliente;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.JLabel;
 
-/**
- *
- * @author laboratorio_computo
- */
-public class jfPrincipal extends javax.swing.JFrame {
+public class jfPrincipal extends javax.swing.JFrame implements Runnable {
 
-    /**
-     * Creates new form jfPrincipal
-     */
+    String hora,minutos,segundos,ampm, fech;
+    Calendar cal;    
+    Thread  h1;
+    
     public jfPrincipal() {
         initComponents();
+        h1 = new Thread( this);
+        h1.start();
+        
     }
 
     /**
@@ -36,8 +39,8 @@ public class jfPrincipal extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jPanel6 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
+        btnCambiarCon = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton4 = new javax.swing.JButton();
@@ -55,12 +58,12 @@ public class jfPrincipal extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblHora = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -110,29 +113,29 @@ public class jfPrincipal extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iniciar.png"))); // NOI18N
-        jButton1.setText("Iniciar");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iniciar.png"))); // NOI18N
+        btnLogin.setText("Iniciar");
+        btnLogin.setFocusable(false);
+        btnLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogin.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jToolBar1.add(btnLogin);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cambiarUsuario.png"))); // NOI18N
-        jButton2.setText("Cambiar");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCambiarCon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cambiarUsuario.png"))); // NOI18N
+        btnCambiarCon.setText("Cambiar");
+        btnCambiarCon.setFocusable(false);
+        btnCambiarCon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCambiarCon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCambiarCon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCambiarConActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton2);
+        jToolBar1.add(btnCambiarCon);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cerrar.png"))); // NOI18N
         jButton3.setText("Cerrar");
@@ -267,9 +270,9 @@ public class jfPrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblHora.setBackground(new java.awt.Color(255, 255, 255));
+        lblHora.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblHora.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -279,7 +282,7 @@ public class jfPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -289,7 +292,7 @@ public class jfPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
@@ -323,9 +326,9 @@ public class jfPrincipal extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblFecha.setBackground(new java.awt.Color(255, 255, 255));
+        lblFecha.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblFecha.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -335,7 +338,7 @@ public class jfPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -345,7 +348,7 @@ public class jfPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -456,32 +459,65 @@ public class jfPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    //metodo run 
+    @Override
+    public void run() {
+        Thread ct = Thread.currentThread();
+        while(ct == h1) {   
+            calcula();
+            lblHora.setText(hora + ":" + minutos + ":" + segundos + " "+ampm);
+            lblFecha.setText(fech);
+            try {
+                Thread.sleep(1000);
+            }catch(InterruptedException e) {}
+        }
+    }
     
-   //Cambiart el icono de un formulario
+    public void calcula () {        
+        cal = new GregorianCalendar();
+        Date data = new Date(); 
+        cal.setTime(data);
+        
+        ampm = cal.get(Calendar.AM_PM)==Calendar.AM ? "AM":"PM";
+
+        if(ampm.equals("PM")){
+            int h = cal.get(Calendar.HOUR_OF_DAY)-12;
+            hora = h>9?""+h:"0"+h;
+        }else{
+            hora = cal.get(Calendar.HOUR_OF_DAY)>9?""+cal.get(Calendar.HOUR_OF_DAY):"0"+cal.get(Calendar.HOUR_OF_DAY);            
+        }
+        minutos = cal.get(Calendar.MINUTE)>9?""+cal.get(Calendar.MINUTE):"0"+cal.get(Calendar.MINUTE);
+        segundos = cal.get(Calendar.SECOND)>9?""+cal.get(Calendar.SECOND):"0"+cal.get(Calendar.SECOND);
+        fech = String.valueOf(cal.get(Calendar.DAY_OF_MONTH))+'/'+String.valueOf(cal.get(Calendar.MONTH)+1)+'/'+String.valueOf(cal.get(Calendar.YEAR));
+    }
+   //Cambiar el icono de un formulario
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
          getImage(ClassLoader.getSystemResource("Recursos/icono.png"));
        return retValue;
     }
+    
+    //public void setFechaHora (){
+     //   LocalDateTime date = LocalDateTime.now();
+     //   lblHora.setText(String.valueOf(date.getHour())+":" +String.valueOf(date.getMinute()));
+    //}
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         jdCambiarContraseña objLogin = new jdCambiarContraseña( this , true);
         objLogin.setLocationRelativeTo(this);
         objLogin.setVisible(true);
         lblUsuarioActivo.setText(objLogin.nombreUsuario);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
         lblUsuarioActivo.setHorizontalTextPosition(JLabel.CENTER);
         jdCambiarContraseña objLogin = new jdCambiarContraseña( this , true);
         objLogin.setLocationRelativeTo(this);
@@ -489,29 +525,26 @@ public class jfPrincipal extends javax.swing.JFrame {
         lblUsuarioActivo.setText(objLogin.nombreUsuario);
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    private void btnCambiarConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarConActionPerformed
         jdInicioSesion objCambiar = new jdInicioSesion(this,true);
         objCambiar.setLocationRelativeTo(this);
         objCambiar.usuarioActual=lblUsuarioActivo.getText();
         objCambiar.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCambiarConActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCambiarCon;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -546,6 +579,9 @@ public class jfPrincipal extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblUsuarioActivo;
     // End of variables declaration//GEN-END:variables
+
 }

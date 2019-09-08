@@ -1,5 +1,5 @@
 //04/09/2019
-package appunidad1;
+package capaCliente;
 
 import capaNegocio.clsUsuario;
 import javax.swing.JOptionPane;
