@@ -115,7 +115,7 @@ alter table MOVIMIENTO add constraint FK_MOV_USU foreign key (codUsuario) refere
 
 --para agregar la columna hora a la tabla movimiento
 alter table movimiento add column hora time not null default current_time
-
+--para poner la fecha automatico
 alter table movimiento alter column fecha set data type default current_date
 --para ver si hay registros en la tabla movimiento
 select numMovimiento from movimiento  order by numMovimiento limit 1
