@@ -119,6 +119,8 @@ alter table movimiento add column hora time not null default current_time
 alter table movimiento alter column fecha set data type default current_date
 --para ver si hay registros en la tabla movimiento
 select numMovimiento from movimiento  order by numMovimiento limit 1
+--para poner la columna hora un tipo de dato  time with time zone
+ALTER TABLE movimiento alter column hora set data type time with time zone
 
 
 
