@@ -3,6 +3,7 @@ package capaNegocio;
 
 import capaDatos.clsJDBC;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -107,5 +108,37 @@ public class clsUsuario {
         } catch (Exception e) {
             throw new Exception("Error al actualizar la tabla movimientos ");
         }
+   }
+   
+   public Time obLastSesionTime (String us) throws Exception{
+       int coduser = conocerCodusuario(us);
+       strSQL = "select hora from movimiento where codusuario="+coduser+" order by fecha,hora desc limit 1";
+       try {
+           rs = objConectar.consultarBD(strSQL);
+           while (rs.next()) {               
+               return rs.getTime("hora");
+           }
+       } catch (Exception e) {
+           throw new Exception("Error al obtener la hora del último inicio de sesión");
+       }
+       return Time.valueOf("00:00:00"); 
+   }
+   
+   public Date obLastSesionDate (String user) throws Exception {
+      /*String startDate="00-00-0000";
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date date = sdf1.parse(startDate);
+        java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());  */
+       int coduser = conocerCodusuario(user);
+       strSQL = "select fecha from movimiento where codusuario="+coduser+" order by fecha,hora desc limit 1";
+       try {
+           rs = objConectar.consultarBD(strSQL);
+           while (rs.next()) {               
+               return rs.getDate("fecha");
+           }
+       } catch (Exception e) {
+           throw new Exception("Error al la fecha del último inicio de sesión");
+       }
+       return Date.valueOf("1900-01-01") ;
    }
 }

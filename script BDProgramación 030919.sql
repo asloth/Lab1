@@ -111,18 +111,19 @@ codUsuario int not null,
 fecha date not null,
 estado Boolean not null);
 
-alter table MOVIMIENTO add constraint FK_MOV_USU foreign key (codUsuario) references USUARIO
+alter table MOVIMIENTO add constraint FK_MOV_USU foreign key (codUsuario) references USUARIO;
 
 --para agregar la columna hora a la tabla movimiento
-alter table movimiento add column hora time not null default current_time
+alter table movimiento add column hora time not null default current_time;
 --para poner la fecha automatico
-alter table movimiento alter column fecha set data type default current_date
+alter table movimiento alter column fecha set data type default current_date;
 --para ver si hay registros en la tabla movimiento
-select numMovimiento from movimiento  order by numMovimiento limit 1
+select numMovimiento from movimiento  order by numMovimiento limit ;
 --para poner la columna hora un tipo de dato  time with time zone
-ALTER TABLE movimiento alter column hora set data type time with time zone
+ALTER TABLE movimiento alter column hora set data type time with time zone;
 --para ingresar el registro 
 insert into movimiento values (DEFAULT, codusuario, CURRENT_DATE, true, CURRENT_TIME) ;
-
+--query para obtener el ultimo ingreso de un usuario respectivo
+select fecha,hora from movimiento where codusuario=1 order by fecha,hora desc limit 1;
 
 
