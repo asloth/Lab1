@@ -125,5 +125,7 @@ ALTER TABLE movimiento alter column hora set data type time with time zone;
 insert into movimiento values (DEFAULT, codusuario, CURRENT_DATE, true, CURRENT_TIME) ;
 --query para obtener el ultimo ingreso de un usuario respectivo
 select fecha,hora from movimiento where codusuario=1 order by fecha,hora desc limit 1;
+--query para obtener el numero de veces que ha ingresado el usuario
+select count(codusuario) from movimiento  where codusuario=1 group by codusuario;
 
 

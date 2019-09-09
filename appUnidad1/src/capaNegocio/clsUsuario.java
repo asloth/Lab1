@@ -125,10 +125,6 @@ public class clsUsuario {
    }
    
    public Date obLastSesionDate (String user) throws Exception {
-      /*String startDate="00-00-0000";
-        SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-        java.util.Date date = sdf1.parse(startDate);
-        java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());  */
        int coduser = conocerCodusuario(user);
        strSQL = "select fecha from movimiento where codusuario="+coduser+" order by fecha,hora desc limit 1";
        try {
@@ -140,5 +136,19 @@ public class clsUsuario {
            throw new Exception("Error al la fecha del último inicio de sesión");
        }
        return Date.valueOf("1900-01-01") ;
+   }
+   
+   public int numeroIngresos (String user) throws Exception{
+       int coduser = conocerCodusuario(user);
+       strSQL = "select count(codusuario) from movimiento  where codusuario="+coduser+" group by codusuario";
+       try {
+           rs = objConectar.consultarBD(strSQL);
+           while (rs.next()) {               
+               return rs.getInt("count");
+           }
+       } catch (Exception e) {
+           throw new Exception("Error al consultar el numero de ingresos");
+       }
+       return -1;
    }
 }

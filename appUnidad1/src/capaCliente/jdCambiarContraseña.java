@@ -12,7 +12,7 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
     clsUsuario objUsuario = new clsUsuario();
     Byte numIntentos=0;
     public String nombreUsuario="";
-       
+    public String numIngreso="0" ;
     public jdCambiarContraseña(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -254,6 +254,7 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
                 }else{
                     objUsuario.ingresarMovimiento(txtUsuario.getText());
                     JOptionPane.showMessageDialog(null,nombreUsuario + ", Bienvenido al Sistema!");
+                    numIngreso = String.valueOf( objUsuario.numeroIngresos(txtUsuario.getText()) );
                     this.dispose();
                 }  
             }else{
@@ -266,7 +267,6 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        // TODO add your handling code here:
         try {
             nombreUsuario=objUsuario.validarPreguntaSecreta(txtUsuario.getText(), txtRespuesta.getText());
             if (nombreUsuario.equals("")){
@@ -274,6 +274,7 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
                 this.dispose();
             }else{
                 JOptionPane.showMessageDialog(null,nombreUsuario + " Bienvenido al Sistema!");
+                numIngreso = String.valueOf( objUsuario.numeroIngresos(txtUsuario.getText()) );
                 this.dispose();
             }  
         } catch (Exception e) {
