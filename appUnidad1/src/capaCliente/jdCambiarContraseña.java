@@ -39,6 +39,7 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         txtContraseña = new javax.swing.JPasswordField();
         lblLastSesion = new javax.swing.JLabel();
+        lblLastTime = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblPregunta = new javax.swing.JLabel();
         txtRespuesta = new javax.swing.JTextField();
@@ -117,6 +118,10 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
         lblLastSesion.setForeground(new java.awt.Color(51, 153, 255));
         lblLastSesion.setText("Último inicio de sesión");
 
+        lblLastTime.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblLastTime.setForeground(new java.awt.Color(51, 153, 255));
+        lblLastTime.setText("-");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -136,9 +141,11 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblLastSesion)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblLastSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblLastTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -158,7 +165,9 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblLastSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblLastTime)
+                .addGap(30, 30, 30))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -217,7 +226,7 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -291,7 +300,8 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
                 if (fech.toString().equals("1900-01-01")) {
                     lblLastSesion.setText("Es la primera vez que inicia sesión");
                 } else {
-                    lblLastSesion.setText("Ultimo ingreso el: "+String.valueOf(fech)+" a las: "+String.valueOf(hor));
+                    lblLastSesion.setText("Último ingreso el: "+String.valueOf(fech));
+                    lblLastTime.setText("A las: "+String.valueOf(hor));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(jdCambiarContraseña.class.getName()).log(Level.SEVERE, null, ex);
@@ -312,6 +322,7 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel lblLastSesion;
+    private javax.swing.JLabel lblLastTime;
     private javax.swing.JLabel lblPregunta;
     private javax.swing.JPasswordField txtContraseña;
     private javax.swing.JTextField txtRespuesta;
