@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package capaCliente;
 
 import java.awt.Image;
@@ -532,7 +527,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
-         getImage(ClassLoader.getSystemResource("Recursos/icono.png"));
+        getImage(ClassLoader.getSystemResource("Recursos/icono.png"));
        return retValue;
     }
     
