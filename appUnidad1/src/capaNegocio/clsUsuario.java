@@ -91,16 +91,16 @@ public class clsUsuario {
    public void ingresarMovimiento (int coduser) throws Exception{
         int indice=-1;
         strSQL = "insert into movimiento values (DEFAULT,"+coduser +", CURRENT_DATE, true, CURRENT_TIME) ";
-        String str = "select numMovimiento from movimiento order by numMovimiento limit 1";
+        //String str = "select numMovimiento from movimiento order by numMovimiento limit 1";
         try {
-            rs = objConectar.consultarBD(str);
-            if (rs.next()){
-               ResultSet index = objConectar.consultarBD("select max(numMovimiento) from movimiento");
-               while (index.next()){
-                   indice = index.getInt("max");
-               }
-               objConectar.ejecutarBD("update movimiento set estado=false where numMovimiento="+indice);
-           }
+            //rs = objConectar.consultarBD(str);
+            //if (rs.next()){
+               rs = objConectar.consultarBD("select max(numMovimiento) from movimiento");
+               while (rs.next()){
+                   indice = rs.getInt("max");
+                   objConectar.ejecutarBD("update movimiento set estado=false where numMovimiento="+indice);
+               }  
+           //}
            objConectar.ejecutarBD(strSQL);
         } catch (Exception e) {
             throw new Exception("Error al actualizar la tabla movimientos ");
@@ -109,7 +109,7 @@ public class clsUsuario {
    
    public Time obLastSesionTime (String us) throws Exception{
        int coduser = conocerCodusuario(us);
-       strSQL = "select hora from movimiento where codusuario="+coduser+" order by fecha,hora desc limit 1";
+       strSQL = "select hora from movimiento where codusuario="+coduser+" order by numMovimiento desc limit 1";
        try {
            rs = objConectar.consultarBD(strSQL);
            while (rs.next()) {               
@@ -123,7 +123,7 @@ public class clsUsuario {
    
    public Date obLastSesionDate (String user) throws Exception {
        int coduser = conocerCodusuario(user);
-       strSQL = "select fecha from movimiento where codusuario="+coduser+" order by fecha,hora desc limit 1";
+       strSQL = "select fecha from movimiento where codusuario="+coduser+" order by numMovimiento desc limit 1";
        try {
            rs = objConectar.consultarBD(strSQL);
            while (rs.next()) {               
@@ -135,8 +135,7 @@ public class clsUsuario {
        return Date.valueOf("1900-01-01") ;
    }
    
-   public int numeroIngresos (String user) throws Exception{
-       int coduser = conocerCodusuario(user);
+   public int numeroIngresos (int coduser) throws Exception{
        strSQL = "select count(codusuario) from movimiento  where codusuario="+coduser+" group by codusuario";
        try {
            rs = objConectar.consultarBD(strSQL);

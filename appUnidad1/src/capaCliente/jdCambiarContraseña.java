@@ -12,9 +12,7 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
     clsUsuario objUsuario = new clsUsuario();
     Byte numIntentos=0;
     public String nombreUsuario="";
-    public String numIngreso="0" ;
-    String user;
-    int coduser;
+    static String numIngreso="0" ;
     public jdCambiarContraseña(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -254,9 +252,9 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String pregunta;
-        user = txtUsuario.getText();
+        String user = txtUsuario.getText();
         try {
-            coduser = objUsuario.conocerCodusuario(user);
+            int coduser = objUsuario.conocerCodusuario(user);
             if (coduser==-1) {
                 throw new Exception("Este usuario no existe");
             }else {
@@ -274,7 +272,7 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
                     }else{
                         JOptionPane.showMessageDialog(null,nombreUsuario + ", Bienvenido al Sistema!");
                         objUsuario.ingresarMovimiento(coduser);
-                        numIngreso = String.valueOf( objUsuario.numeroIngresos(user));
+                        numIngreso = String.valueOf( objUsuario.numeroIngresos(coduser));
                         jfPrincipal.setHora();
                         jfPrincipal.setTrueBtn();
                         this.dispose();
@@ -288,10 +286,11 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,e.getMessage());
         }
     }//GEN-LAST:event_btnLoginActionPerformed
-
+    
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        user = txtUsuario.getText();
+        String user = txtUsuario.getText();
         try {
+            int coduser = objUsuario.conocerCodusuario(user);
             nombreUsuario=objUsuario.validarPreguntaSecreta(user, txtRespuesta.getText());
             if (nombreUsuario.equals("")){
                 JOptionPane.showMessageDialog(null,"Respuesta incorrecta!");
@@ -299,7 +298,7 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(null,nombreUsuario + " Bienvenido al Sistema!");
                 objUsuario.ingresarMovimiento(coduser);
-                numIngreso = String.valueOf( objUsuario.numeroIngresos(user) );
+                numIngreso = String.valueOf( objUsuario.numeroIngresos(coduser) );
                 jfPrincipal.setHora();
                 jfPrincipal.setTrueBtn();
                 this.dispose();
@@ -327,6 +326,7 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
                 Time hor = objUsuario.obLastSesionTime(txtUsuario.getText());
                 if (fech.toString().equals("1900-01-01")) {
                     lblLastSesion.setText("Es la primera vez que inicia sesión");
+                    lblLastTime.setText("");
                 } else {
                     lblLastSesion.setText("Último ingreso el: "+String.valueOf(fech));
                     lblLastTime.setText("A las: "+String.valueOf(hor));

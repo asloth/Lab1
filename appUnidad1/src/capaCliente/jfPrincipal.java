@@ -224,8 +224,8 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addComponent(lblInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -517,6 +517,8 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         objLogin.setLocationRelativeTo(this);
         objLogin.setVisible(true);
         lblUsuarioActivo.setText(objLogin.nombreUsuario);
+        lblNumIngreso.setText(objLogin.numIngreso);
+        setHora();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -526,6 +528,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         objLogin.setVisible(true);
         lblUsuarioActivo.setText(objLogin.nombreUsuario);
         lblNumIngreso.setText(objLogin.numIngreso);
+        setHora();
     }//GEN-LAST:event_formWindowOpened
     static void setFalseBtn(){
         btnCambiarCon.setEnabled(false);
