@@ -18,6 +18,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         initComponents();
         h1 = new Thread( this);
         h1.start();
+        setFalseBtn();
     }
 
     /**
@@ -36,12 +37,12 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         jToolBar1 = new javax.swing.JToolBar();
         btnLogin = new javax.swing.JButton();
         btnCambiarCon = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnCerrarSesion = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
+        btnVenta = new javax.swing.JButton();
+        btnCliente = new javax.swing.JButton();
+        btnPagar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jPanel10 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
@@ -137,46 +138,46 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         });
         jToolBar1.add(btnCambiarCon);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/log_out.png"))); // NOI18N
-        jButton3.setText("Cerrar");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
+        btnCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/log_out.png"))); // NOI18N
+        btnCerrarSesion.setText("Cerrar");
+        btnCerrarSesion.setFocusable(false);
+        btnCerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCerrarSesion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnCerrarSesion);
         jToolBar1.add(jSeparator1);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/consultar.png"))); // NOI18N
-        jButton4.setText("Consultar");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/consultar.png"))); // NOI18N
+        btnConsultar.setText("Consultar");
+        btnConsultar.setFocusable(false);
+        btnConsultar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnConsultar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnConsultarActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton4);
+        jToolBar1.add(btnConsultar);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/venta.png"))); // NOI18N
-        jButton5.setText("Venta");
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton5);
+        btnVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/venta.png"))); // NOI18N
+        btnVenta.setText("Venta");
+        btnVenta.setFocusable(false);
+        btnVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnVenta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnVenta);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cliente.png"))); // NOI18N
-        jButton6.setText("Cliente");
-        jButton6.setFocusable(false);
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton6);
+        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cliente.png"))); // NOI18N
+        btnCliente.setText("Cliente");
+        btnCliente.setFocusable(false);
+        btnCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnCliente);
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/pagar_icon.png"))); // NOI18N
-        jButton7.setText("Pagar");
-        jButton7.setFocusable(false);
-        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton7);
+        btnPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/pagar_icon.png"))); // NOI18N
+        btnPagar.setText("Pagar");
+        btnPagar.setFocusable(false);
+        btnPagar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPagar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnPagar);
         jToolBar1.add(jSeparator2);
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
@@ -214,7 +215,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUsuarioActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
@@ -224,22 +225,20 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblNumIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-                        .addComponent(lblUsuarioActivo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNumIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblUsuarioActivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblInicioSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -302,9 +301,9 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 13, Short.MAX_VALUE))
         );
 
@@ -328,7 +327,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+            .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -360,7 +359,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel10Layout.setVerticalGroup(
@@ -509,9 +508,9 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         jdCambiarContraseña objLogin = new jdCambiarContraseña( this , true);
@@ -528,7 +527,24 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         lblUsuarioActivo.setText(objLogin.nombreUsuario);
         lblNumIngreso.setText(objLogin.numIngreso);
     }//GEN-LAST:event_formWindowOpened
-
+    static void setFalseBtn(){
+        btnCambiarCon.setEnabled(false);
+        btnCerrarSesion.setEnabled(false);
+        btnCliente.setEnabled(false);
+        btnConsultar.setEnabled(false);
+        btnPagar.setEnabled(false);
+        btnVenta.setEnabled(false);
+    }
+    static void setTrueBtn(){
+        btnCambiarCon.setEnabled(true);
+        btnCerrarSesion.setEnabled(true);
+        btnCliente.setEnabled(true);
+        btnConsultar.setEnabled(true);
+        btnPagar.setEnabled(true);
+        btnVenta.setEnabled(true);
+    }
+    
+    
     private void btnCambiarConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarConActionPerformed
         jdInicioSesion objCambiar = new jdInicioSesion(this,true);
         objCambiar.setLocationRelativeTo(this);
@@ -536,13 +552,13 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         objCambiar.setVisible(true);
     }//GEN-LAST:event_btnCambiarConActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCambiarCon;
+    private static javax.swing.JButton btnCambiarCon;
+    private static javax.swing.JButton btnCerrarSesion;
+    private static javax.swing.JButton btnCliente;
+    private static javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private static javax.swing.JButton btnPagar;
+    private static javax.swing.JButton btnVenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

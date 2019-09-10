@@ -3,9 +3,9 @@ package capaNegocio;
 
 import capaDatos.clsJDBC;
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+//import java.text.SimpleDateFormat;
+//import java.util.Calendar;
+//import java.util.GregorianCalendar;
 
 public class clsUsuario {
     //Crear instancia de la clase clsJDBC
@@ -36,7 +36,7 @@ public class clsUsuario {
         } catch (Exception e) {
             throw new Exception("Error al validar usuario..");
         }
-        return false;
+        return false; 
      }
     
     public String obtenerPreguntaSecreta(String usu) throws Exception{
@@ -75,6 +75,7 @@ public class clsUsuario {
     }
     //Calendar fecha = new GregorianCalendar();
     //String fech = String.valueOf(fecha.get(Calendar.DAY_OF_MONTH)) +'/' +String.valueOf(fecha.get(Calendar.MONTH)+1)+'/'+String.valueOf(fecha.get(Calendar.YEAR));
+    
     public int conocerCodusuario (String user) throws Exception{
         String data = "select codUsuario from usuario where nomusuario='"+user+"'";
         try {
@@ -87,17 +88,13 @@ public class clsUsuario {
         }
         return -1;
     }
-   public void ingresarMovimiento (String user) throws Exception{
-        int coduser = conocerCodusuario(user);
+   public void ingresarMovimiento (int coduser) throws Exception{
         int indice=-1;
-        if (coduser==-1) {
-           throw new Exception("Este usuario no existe");
-       }
         strSQL = "insert into movimiento values (DEFAULT,"+coduser +", CURRENT_DATE, true, CURRENT_TIME) ";
         String str = "select numMovimiento from movimiento order by numMovimiento limit 1";
         try {
             rs = objConectar.consultarBD(str);
-           while (rs.next()){
+            if (rs.next()){
                ResultSet index = objConectar.consultarBD("select max(numMovimiento) from movimiento");
                while (index.next()){
                    indice = index.getInt("max");

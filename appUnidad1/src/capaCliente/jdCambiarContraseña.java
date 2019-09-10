@@ -13,6 +13,8 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
     Byte numIntentos=0;
     public String nombreUsuario="";
     public String numIngreso="0" ;
+    String user;
+    int coduser;
     public jdCambiarContraseña(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -252,30 +254,35 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String pregunta;
+        user = txtUsuario.getText();
         try {
-         
-            if (objUsuario.validarVigencia(txtUsuario.getText())){
-                
-                nombreUsuario=objUsuario.login(txtUsuario.getText(),txtContraseña.getText());
-                if (nombreUsuario.equals("")){
-                    JOptionPane.showMessageDialog(null,"Acceso incorrecto, intente nuevamente!!");
-                    numIntentos++;
-                    if (numIntentos>=3){
-                        JOptionPane.showMessageDialog(null,"Superó los tres intentos, responda pregunta secreta!");
-                        //Pregunta secreta
-                        pregunta=objUsuario.obtenerPreguntaSecreta(txtUsuario.getText());
-                        lblPregunta.setText(pregunta);
-                    }
+            coduser = objUsuario.conocerCodusuario(user);
+            if (coduser==-1) {
+                throw new Exception("Este usuario no existe");
+            }else {
+                if (objUsuario.validarVigencia(user)){
+                    nombreUsuario=objUsuario.login(user,txtContraseña.getText());
+                    if (nombreUsuario.equals("")){
+                        JOptionPane.showMessageDialog(null,"Acceso incorrecto, intente nuevamente!!");
+                        numIntentos++;
+                        if (numIntentos>=3){
+                            JOptionPane.showMessageDialog(null,"Superó los tres intentos, responda pregunta secreta!");
+                            //Pregunta secreta
+                            pregunta=objUsuario.obtenerPreguntaSecreta(user);
+                            lblPregunta.setText(pregunta);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null,nombreUsuario + ", Bienvenido al Sistema!");
+                        objUsuario.ingresarMovimiento(coduser);
+                        numIngreso = String.valueOf( objUsuario.numeroIngresos(user));
+                        jfPrincipal.setHora();
+                        jfPrincipal.setTrueBtn();
+                        this.dispose();
+                    }  
                 }else{
-                    objUsuario.ingresarMovimiento(txtUsuario.getText());
-                    JOptionPane.showMessageDialog(null,nombreUsuario + ", Bienvenido al Sistema!");
-                    numIngreso = String.valueOf( objUsuario.numeroIngresos(txtUsuario.getText()) );
-                    jfPrincipal.setHora();
+                    JOptionPane.showMessageDialog(null,"Usuario no está vigente!");
                     this.dispose();
-                }  
-            }else{
-                JOptionPane.showMessageDialog(null,"Usuario no está vigente!");
-                this.dispose();
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e.getMessage());
@@ -283,15 +290,18 @@ public class jdCambiarContraseña extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        user = txtUsuario.getText();
         try {
-            nombreUsuario=objUsuario.validarPreguntaSecreta(txtUsuario.getText(), txtRespuesta.getText());
+            nombreUsuario=objUsuario.validarPreguntaSecreta(user, txtRespuesta.getText());
             if (nombreUsuario.equals("")){
                 JOptionPane.showMessageDialog(null,"Respuesta incorrecta!");
                 this.dispose();
             }else{
                 JOptionPane.showMessageDialog(null,nombreUsuario + " Bienvenido al Sistema!");
-                numIngreso = String.valueOf( objUsuario.numeroIngresos(txtUsuario.getText()) );
+                objUsuario.ingresarMovimiento(coduser);
+                numIngreso = String.valueOf( objUsuario.numeroIngresos(user) );
                 jfPrincipal.setHora();
+                jfPrincipal.setTrueBtn();
                 this.dispose();
             }  
         } catch (Exception e) {
