@@ -128,4 +128,7 @@ select fecha,hora from movimiento where codusuario=1 order by numMovimiento desc
 --query para obtener el numero de veces que ha ingresado el usuario
 select count(codusuario) from movimiento  where codusuario=1 group by codusuario;
 
+--para obtener el mayor codmarca
+select coalesce (max(codMarca),0)+1 from marca
+
 

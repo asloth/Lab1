@@ -28,9 +28,9 @@ public class clsJDBC {
     //Desconectar
     public void desconectar() throws Exception{
         try{
-           con.close();
+            con.close();
         } catch (SQLException ex) {
-             throw new Exception("Error al desconectar de la BD!");
+            throw new Exception("Error al desconectar de la BD!");
         }
     }
     //Ejecutar una consulta SELECT

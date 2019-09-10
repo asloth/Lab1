@@ -63,6 +63,8 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -71,7 +73,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        mnuMantenimientoMarca = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -371,6 +373,25 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icono_compras.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                .addGap(29, 29, 29))
+        );
+
         jMenu1.setText("Login");
 
         jMenuItem1.setText("Iniciar Sesión");
@@ -397,8 +418,13 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         jMenuItem4.setText("Usuario");
         jMenu4.add(jMenuItem4);
 
-        jMenuItem5.setText("Marca");
-        jMenu4.add(jMenuItem5);
+        mnuMantenimientoMarca.setText("Marca");
+        mnuMantenimientoMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuMantenimientoMarcaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnuMantenimientoMarca);
 
         jMenuItem6.setText("Categoría");
         jMenu4.add(jMenuItem6);
@@ -447,13 +473,16 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 519, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -554,6 +583,13 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         objCambiar.usuarioActual=lblUsuarioActivo.getText();
         objCambiar.setVisible(true);
     }//GEN-LAST:event_btnCambiarConActionPerformed
+
+    private void mnuMantenimientoMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMantenimientoMarcaActionPerformed
+        jdMantenimientoMarca objManMarca = new jdMantenimientoMarca(this,true);
+        objManMarca.setLocationRelativeTo(this);
+        objManMarca.setVisible(true);
+    }//GEN-LAST:event_mnuMantenimientoMarcaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JButton btnCambiarCon;
     private static javax.swing.JButton btnCerrarSesion;
@@ -570,6 +606,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -588,11 +625,11 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -608,6 +645,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
     public static javax.swing.JLabel lblInicioSesion;
     private javax.swing.JLabel lblNumIngreso;
     private javax.swing.JLabel lblUsuarioActivo;
+    private javax.swing.JMenuItem mnuMantenimientoMarca;
     // End of variables declaration//GEN-END:variables
 
 }
