@@ -18,7 +18,6 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         initComponents();
         h1 = new Thread( this);
         h1.start();
-        setHora();
     }
 
     /**
@@ -261,7 +260,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/hora.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/clock.png"))); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Hora:");
@@ -307,10 +306,11 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
@@ -527,15 +527,16 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
-        getImage(ClassLoader.getSystemResource("Recursos/icono.png"));
+        getImage(ClassLoader.getSystemResource("Recursos/icono_compras.png"));
        return retValue;
     }
     
-    public void setHora (){
+    public static void setHora (){
        LocalDateTime date = LocalDateTime.now();
        lblInicioSesion.setText(String.valueOf(date.getDayOfMonth())+"/"+String.valueOf(date.getMonth())+"/"+String.valueOf(date.getYear())
                +" | "+ String.valueOf(date.getHour())+":" +String.valueOf(date.getMinute()));
     }
+    
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -618,7 +619,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblHora;
-    private javax.swing.JLabel lblInicioSesion;
+    public static javax.swing.JLabel lblInicioSesion;
     private javax.swing.JLabel lblNumIngreso;
     private javax.swing.JLabel lblUsuarioActivo;
     // End of variables declaration//GEN-END:variables
