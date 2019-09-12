@@ -3,9 +3,6 @@ package capaNegocio;
 
 import capaDatos.clsJDBC;
 import java.sql.*;
-//import java.text.SimpleDateFormat;
-//import java.util.Calendar;
-//import java.util.GregorianCalendar;
 
 public class clsUsuario {
     //Crear instancia de la clase clsJDBC
