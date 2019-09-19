@@ -47,4 +47,32 @@ public class clsMarca {
             throw new Exception("Error al borrar marca");
         }
     }
+    
+    public ResultSet listarMarca() throws Exception{
+        strSQL = "select * from marca";
+        try {
+            rs = objConectar.consultarBD(strSQL);
+            return rs;
+        } catch (Exception e) {
+            throw new Exception("Error al buscar marca");
+        }
+    }
+    
+    public void modificarMarca (int cod, String nom, Boolean vg) throws Exception{
+        strSQL = "update marca set nommarca='"+nom+"' , vigencia="+vg+" where codmarca="+cod;
+        try {
+            objConectar.ejecutarBD(strSQL);
+        } catch (Exception e) {
+            throw new Exception("Error al modificar la marca");
+        }
+    }
+    
+    public void modificarVigencia (int cod, Boolean vg) throws Exception{
+        strSQL = "update marca set vigencia="+vg+" where codmarca="+cod;
+        try {
+            objConectar.ejecutarBD(strSQL);
+        } catch (Exception e) {
+            throw new Exception("Error al modificar la marca");
+        }
+    }
 }

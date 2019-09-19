@@ -1,8 +1,10 @@
 package capaCliente;
 
 import capaNegocio.clsMarca;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class jdMantenimientoMarca extends javax.swing.JDialog {
@@ -27,7 +29,7 @@ public class jdMantenimientoMarca extends javax.swing.JDialog {
         txtNombre = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblMarcas = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         btnModificar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
@@ -62,6 +64,12 @@ public class jdMantenimientoMarca extends javax.swing.JDialog {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Vigente:");
+
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -104,7 +112,7 @@ public class jdMantenimientoMarca extends javax.swing.JDialog {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMarcas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -115,7 +123,12 @@ public class jdMantenimientoMarca extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblMarcas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMarcasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblMarcas);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -293,6 +306,7 @@ public class jdMantenimientoMarca extends javax.swing.JDialog {
             }else{
                 btnNuevo.setText("Nuevo");
                 objMarca.registrar(Integer.parseInt(txtCodigo.getText()),txtNombre.getText() , chkVigencia.isSelected());
+                listarMarcas();
                 limpiarControles();
             }
         } catch (Exception e) {
@@ -321,6 +335,7 @@ public class jdMantenimientoMarca extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Debe ingresar un codigo");
             }else {
                 objMarca.borrarMarca(Integer.parseInt(txtCodigo.getText()));
+                listarMarcas();
                 limpiarControles();
             }
         } catch (Exception e) {
@@ -330,15 +345,28 @@ public class jdMantenimientoMarca extends javax.swing.JDialog {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         try {
-            
-            
+            objMarca.modificarMarca(Integer.parseInt(txtCodigo.getText()), txtNombre.getText() , chkVigencia.isSelected());
+            listarMarcas();
+            limpiarControles();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Error al modificar");
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
+        listarMarcas ();
     }//GEN-LAST:event_formWindowActivated
+
+    private void tblMarcasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMarcasMouseClicked
+        txtCodigo.setText(String.valueOf(tblMarcas.getValueAt(tblMarcas.getSelectedRow(),0 )));
+        btnBuscarActionPerformed(null);
+    }//GEN-LAST:event_tblMarcasMouseClicked
+
+    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER){
+            btnBuscar.doClick();
+        }
+    }//GEN-LAST:event_txtCodigoKeyTyped
     
     private void limpiarControles(){
         txtCodigo.setText("");
@@ -347,6 +375,23 @@ public class jdMantenimientoMarca extends javax.swing.JDialog {
         txtCodigo.requestFocus();
     }
     
+    private void listarMarcas (){
+        ResultSet rsMarcas = null;
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Codigo");
+        model.addColumn("Nombre");
+        model.addColumn("Vigencia");
+        try {
+            rsMarcas = objMarca.listarMarca();
+            while (rsMarcas.next()){
+                model.addRow(new Object[]{rsMarcas.getInt("codmarca"), rsMarcas.getString("nommarca"), rsMarcas.getBoolean("vigencia")} );
+            }
+            tblMarcas.setModel(model);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error", "Error al listar tabla", WIDTH);
+        }
+        
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -367,7 +412,7 @@ public class jdMantenimientoMarca extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblMarcas;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
