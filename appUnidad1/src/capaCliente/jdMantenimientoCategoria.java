@@ -6,7 +6,6 @@
 package capaCliente;
 
 import capaNegocio.clsCategoria;
-import capaNegocio.clsMarca;
 import java.awt.event.KeyEvent;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.sql.ResultSet;
@@ -396,7 +395,7 @@ public class jdMantenimientoCategoria extends javax.swing.JDialog {
             btnBuscar.doClick();
         }
     }//GEN-LAST:event_txtCodigoKeyTyped
-private void limpiarControles(){
+    private void limpiarControles(){
         txtCodigo.setText("");
         txtNombre.setText("");
         txtDes.setText("");

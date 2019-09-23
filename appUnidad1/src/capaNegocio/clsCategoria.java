@@ -85,4 +85,15 @@ public class clsCategoria {
             throw new Exception("Error al modificar la vigencia");
         }
     }
+    
+    public Integer obtenerCodigoCategoria(String nom) throws Exception{
+        strSQL = "select codCategoria from categoria where nomcategoria='" + nom + "'" ;
+        try {
+            rs=objConectar.consultarBD(strSQL);
+            if (rs.next()) return rs.getInt("codCategoria");
+        } catch (Exception e) {
+            throw new Exception("Error al buscar categoria");
+        }
+        return 0;
+    }
 }

@@ -1,4 +1,3 @@
-/* 03 Set 2019 */
 package capaNegocio;
 
 import capaDatos.clsJDBC;
@@ -85,63 +84,131 @@ public class clsUsuario {
         }
         return -1;
     }
-   public void ingresarMovimiento (int coduser) throws Exception{
-        int indice=-1;
-        strSQL = "insert into movimiento values (DEFAULT,"+coduser +", CURRENT_DATE, true, CURRENT_TIME) ";
-        //String str = "select numMovimiento from movimiento order by numMovimiento limit 1";
+    
+    public void ingresarMovimiento (int coduser) throws Exception{
+         int indice;
+         strSQL = "insert into movimiento values (DEFAULT,"+coduser +", CURRENT_DATE, true, CURRENT_TIME) ";
+         //String str = "select numMovimiento from movimiento order by numMovimiento limit 1";
+         try {
+                rs = objConectar.consultarBD("select max(numMovimiento) from movimiento");
+                while (rs.next()){
+                    indice = rs.getInt("max");
+                    objConectar.ejecutarBD("update movimiento set estado=false where numMovimiento="+indice);
+                }  
+            objConectar.ejecutarBD(strSQL);
+         } catch (Exception e) {
+             throw new Exception("Error al actualizar la tabla movimientos ");
+         }
+    }
+
+    public Time obLastSesionTime (String us) throws Exception{
+        int coduser = conocerCodusuario(us);
+        strSQL = "select hora from movimiento where codusuario="+coduser+" order by numMovimiento desc limit 1";
         try {
-            //rs = objConectar.consultarBD(str);
-            //if (rs.next()){
-               rs = objConectar.consultarBD("select max(numMovimiento) from movimiento");
-               while (rs.next()){
-                   indice = rs.getInt("max");
-                   objConectar.ejecutarBD("update movimiento set estado=false where numMovimiento="+indice);
-               }  
-           //}
-           objConectar.ejecutarBD(strSQL);
+            rs = objConectar.consultarBD(strSQL);
+            while (rs.next()) {               
+                return rs.getTime("hora");
+            }
         } catch (Exception e) {
-            throw new Exception("Error al actualizar la tabla movimientos ");
+            throw new Exception("Error al obtener la hora del último inicio de sesión");
         }
-   }
-   
-   public Time obLastSesionTime (String us) throws Exception{
-       int coduser = conocerCodusuario(us);
-       strSQL = "select hora from movimiento where codusuario="+coduser+" order by numMovimiento desc limit 1";
-       try {
-           rs = objConectar.consultarBD(strSQL);
-           while (rs.next()) {               
-               return rs.getTime("hora");
-           }
-       } catch (Exception e) {
-           throw new Exception("Error al obtener la hora del último inicio de sesión");
-       }
-       return Time.valueOf("00:00:00"); 
-   }
-   
-   public Date obLastSesionDate (String user) throws Exception {
-       int coduser = conocerCodusuario(user);
-       strSQL = "select fecha from movimiento where codusuario="+coduser+" order by numMovimiento desc limit 1";
-       try {
-           rs = objConectar.consultarBD(strSQL);
-           while (rs.next()) {               
-               return rs.getDate("fecha");
-           }
-       } catch (Exception e) {
-           throw new Exception("Error al la fecha del último inicio de sesión");
-       }
-       return Date.valueOf("1900-01-01") ;
-   }
-   
-   public int numeroIngresos (int coduser) throws Exception{
-       strSQL = "select count(codusuario) from movimiento  where codusuario="+coduser+" group by codusuario";
-       try {
-           rs = objConectar.consultarBD(strSQL);
-           while (rs.next()) {               
-               return rs.getInt("count");
-           }
-       } catch (Exception e) {
-           throw new Exception("Error al consultar el numero de ingresos");
-       }
-       return -1;
-   }
+        return Time.valueOf("00:00:00"); 
+    }
+
+    public Date obLastSesionDate (String user) throws Exception {
+        int coduser = conocerCodusuario(user);
+        strSQL = "select fecha from movimiento where codusuario="+coduser+" order by numMovimiento desc limit 1";
+        try {
+            rs = objConectar.consultarBD(strSQL);
+            while (rs.next()) {               
+                return rs.getDate("fecha");
+            }
+        } catch (Exception e) {
+            throw new Exception("Error al la fecha del último inicio de sesión");
+        }
+        return Date.valueOf("1900-01-01") ;
+    }
+
+    public int numeroIngresos (int coduser) throws Exception{
+        strSQL = "select count(codusuario) from movimiento  where codusuario="+coduser+" group by codusuario";
+        try {
+            rs = objConectar.consultarBD(strSQL);
+            while (rs.next()) {               
+                return rs.getInt("count");
+            }
+        } catch (Exception e) {
+            throw new Exception("Error al consultar el numero de ingresos");
+        }
+        return -1;
+    }
+
+    public ResultSet buscarUsuario(Integer cod) throws Exception{
+         strSQL = "select * from usuario where codusuario=" + cod ;
+         try {
+             rs=objConectar.consultarBD(strSQL);
+             return rs;
+         } catch (Exception e) {
+             throw new Exception("Error al buscar el usuario");
+         }
+     }
+
+    public void modificarVigenciaUsuario (int cod) throws Exception{
+         strSQL = "update usuario set estado=false where codusuario="+cod;
+         try {
+             objConectar.ejecutarBD(strSQL);
+         } catch (Exception e) {
+             throw new Exception("Error al modificar la vigencia del usuario");
+         }
+     }
+
+    public void modificarUsuario (int cod, String nom, String clv, String ncom,String carg, String prg, String rsp,Boolean vg) throws Exception{
+         strSQL = "update usuario set nomusuario='"+nom+ "',clave='"+clv + "' , nombrecompleto=' "+ncom +"', cargo='"+carg 
+                 +"' , estado="+vg+ ", pregunta='"+prg+"', respuesta='"+rsp+"' where codusuario="+cod;
+         try {
+             objConectar.ejecutarBD(strSQL);
+         } catch (Exception e) {
+             throw new Exception("Error al modificar la categoria");
+         }
+    }
+
+    public ResultSet listarUsuario() throws Exception{
+         strSQL = "select * from usuario";
+         try {
+             rs = objConectar.consultarBD(strSQL);
+             return rs;
+         } catch (Exception e) {
+             throw new Exception("Error al listar usuario");
+         }
+    }
+
+    public void borrarUsuario(Integer cod) throws Exception{
+         strSQL = "delete from usuario where codusuario= "+cod;
+         try {
+             objConectar.ejecutarBD(strSQL);
+         } catch (Exception e) {
+             throw new Exception("Error al borrar usuario");
+         }
+    }
+    
+    public void registrarUsuario (int cod, String nom, String clv, String ncom,String carg, String prg, String rsp,Boolean vg) throws Exception{
+         strSQL = "INSERT INTO usuario values (" +cod +", '"+ nom +"','"+ clv +"','"+ ncom +"','"+ carg +"',"+ vg+",'"+ prg+"','"+ rsp+"')";
+         try {
+             objConectar.ejecutarBD(strSQL);
+         } catch (Exception e) {
+             throw new Exception("Error al modificar la categoria");
+         }
+    }
+    
+    public Integer generarCodigoUsuario() throws Exception{
+        strSQL="select coalesce (max(codusuario),0)+1 as codigo from usuario";
+        try {
+            rs = objConectar.consultarBD(strSQL);
+            while (rs.next()) {                
+                return rs.getInt("codigo");
+            }
+        } catch (Exception e) {
+            throw new Exception("Error al generar el codigo de categoria");
+        }
+        return 0;
+    }
 }

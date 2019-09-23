@@ -75,4 +75,15 @@ public class clsMarca {
             throw new Exception("Error al modificar la marca");
         }
     }
+    
+    public Integer obtenerCodigoMarca(String nom) throws Exception{
+        strSQL = "select codMarca from marca where nommarca='" + nom + "'" ;
+        try {
+            rs=objConectar.consultarBD(strSQL);
+            if (rs.next()) return rs.getInt("codMarca");
+        } catch (Exception e) {
+            throw new Exception("Error al buscar marca");
+        }
+        return 0;
+    }
 }

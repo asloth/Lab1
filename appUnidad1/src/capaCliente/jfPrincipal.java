@@ -416,6 +416,11 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         jMenu4.setText("Mantenimiento");
 
         jMenuItem4.setText("Usuario");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem4);
 
         mnuMantenimientoMarca.setText("Marca");
@@ -435,6 +440,11 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         jMenu4.add(jMenuItem6);
 
         jMenuItem7.setText("Producto");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem7);
 
         jMenuBar1.add(jMenu4);
@@ -600,6 +610,18 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         objManCat.setLocationRelativeTo(this);
         objManCat.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        jdManProducto objManProd = new jdManProducto(this,true);
+        objManProd.setLocationRelativeTo(this);
+        objManProd.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        jdMantenimientoUsuario objManUser = new jdMantenimientoUsuario(this,true);
+        objManUser.setLocationRelativeTo(this);
+        objManUser.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JButton btnCambiarCon;
