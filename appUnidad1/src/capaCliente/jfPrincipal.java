@@ -452,6 +452,11 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         jMenu5.setText("Ventas");
 
         jMenuItem8.setText("Consultar Producto");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem8);
 
         jMenuItem9.setText("Gestionar Cliente");
@@ -622,6 +627,12 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         objManUser.setLocationRelativeTo(this);
         objManUser.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        jdConsultas obj = new jdConsultas(this,true);
+        obj.setLocationRelativeTo(this);
+        obj.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JButton btnCambiarCon;

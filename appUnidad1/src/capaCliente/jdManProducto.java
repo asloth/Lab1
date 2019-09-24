@@ -475,7 +475,7 @@ public class jdManProducto extends javax.swing.JDialog {
             if (txtCodigo.getText().equals("")){
                 JOptionPane.showMessageDialog(this,"Debe ingresar un código para buscar");
             }else{
-                rsProducto= objProducto.buscarProducto(Integer.parseInt( txtCodigo.getText()));
+                rsProducto= objProducto.buscarProducto(Integer.parseInt(txtCodigo.getText()));
                 if (rsProducto.next()){
                     txtNombre.setText(rsProducto.getString("nomProducto"));
                     txtDescripcion.setText(rsProducto.getString("descripcion"));
@@ -515,9 +515,17 @@ public class jdManProducto extends javax.swing.JDialog {
                 }else{
                     vigencia="No";
                 }
-                modelo.addRow(new Object[]{rsPro.getInt("codProducto"),rsPro.getString("nomProducto"),rsPro.getString("descripcion"),rsPro.getString("precio"),rsPro.getString("stock"),vigencia,rsPro.getString("nomMarca"),rsPro.getString("nomCategoria")});
+                modelo.addRow(new Object[]{rsPro.getInt("codProducto"),
+                    rsPro.getString("nomProducto"),
+                    rsPro.getString("descripcion"),
+                    rsPro.getFloat("precio"),
+                    rsPro.getInt("stock"),
+                    vigencia,
+                    rsPro.getString("nomMarca"),
+                    rsPro.getString("nomCategoria")});
            }
         } catch (Exception e) {
+            
         }
     }
 
