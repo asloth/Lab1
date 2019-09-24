@@ -72,7 +72,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        mnuManUsuario = new javax.swing.JMenuItem();
         mnuMantenimientoMarca = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -415,13 +415,13 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
 
         jMenu4.setText("Mantenimiento");
 
-        jMenuItem4.setText("Usuario");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        mnuManUsuario.setText("Usuario");
+        mnuManUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                mnuManUsuarioActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem4);
+        jMenu4.add(mnuManUsuario);
 
         mnuMantenimientoMarca.setText("Marca");
         mnuMantenimientoMarca.addActionListener(new java.awt.event.ActionListener() {
@@ -622,11 +622,11 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         objManProd.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void mnuManUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuManUsuarioActionPerformed
         jdMantenimientoUsuario objManUser = new jdMantenimientoUsuario(this,true);
         objManUser.setLocationRelativeTo(this);
         objManUser.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_mnuManUsuarioActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         jdConsultas obj = new jdConsultas(this,true);
@@ -668,7 +668,6 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
@@ -689,6 +688,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
     public static javax.swing.JLabel lblInicioSesion;
     private javax.swing.JLabel lblNumIngreso;
     private javax.swing.JLabel lblUsuarioActivo;
+    private static javax.swing.JMenuItem mnuManUsuario;
     private javax.swing.JMenuItem mnuMantenimientoMarca;
     // End of variables declaration//GEN-END:variables
 
