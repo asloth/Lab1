@@ -13,7 +13,7 @@ import java.sql.ResultSet;
  * @author Sara
  */
 public class clsProducto {
-     clsJDBC objConectar = new clsJDBC();
+    clsJDBC objConectar = new clsJDBC();
     String strSQL;
     ResultSet rs=null;
     
