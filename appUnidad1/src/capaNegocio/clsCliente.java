@@ -49,4 +49,20 @@ public class clsCliente {
             throw new Exception("Error al registrar");
         }
     }
+      
+      public void modificarCliente (Integer cod, String nom,String dni,String ruc,String nombres,String telefono,String correo,String direccion, Boolean vig, Integer codTipo) throws Exception{
+        strSQL="update cliente set ='" + nom + 
+                "', ='" + cod+ 
+                "', =" + nom + 
+                ", =" + dni + 
+                ", =" + ruc + 
+                ", =" + nombres + 
+                ", =" + telefono + 
+                " =" + correo;
+        try {
+            objConectar.ejecutarBD(strSQL);
+        } catch (Exception e) {
+            throw new Exception ("Error al modificar un producto!");
+        }
+    }
 }
