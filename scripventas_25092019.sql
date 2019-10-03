@@ -2,10 +2,12 @@
 codtipo serial not null primary key,
 nombre varchar(20) not null
 )
-select * from tipo_cliente
-insert into tipo_cliente(nombre) values ('Persona natural RUC')
 
-drop table cliente
+insert into tipo_cliente(nombre) values ('Persona natural con RUC')
+insert into tipo_cliente(nombre) values ('Persona natural')
+insert into tipo_cliente(nombre) values ('Persona juridica')
+
+
 
 create table cliente(
 codcliente int not null primary key,
@@ -17,7 +19,7 @@ correo varchar (50) null,
 direccion varchar(70) not null,
 vigencia boolean not null,
 codtipo int not null references tipo_cliente(codtipo)
-)
+);
 
 create table venta(
 numventa int not null primary key,
@@ -28,8 +30,7 @@ igv decimal(10,2) null,
 tipocomprobante boolean not null,
 estadopago boolean not null,
 codcliente int not null references cliente(codcliente) 
-)
-
+);
 
 create table detalle(
 numventa int not null references venta(numventa),
@@ -39,5 +40,5 @@ precioventa decimal(8,2) not null,
 descuento smallint not null,
 subtotal decimal(10,2) not null,
 constraint pk_detalle primary key (numventa,codproducto)
-)
+);
 

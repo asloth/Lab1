@@ -90,7 +90,7 @@ public class clsProducto {
     }
     
     public ResultSet listarProductosPorCategoria(int codCat) throws Exception{
-        strSQL="select P.*,M.nommarca, C.nomcategoria from producto P inner join Marca M on P.codmarca=M.codmarca inner join Categoria C on P.codcategoria=C.codcategoria where codcategoria="+codCat + " order by codproducto";
+        strSQL="select P.*,M.nommarca, C.nomcategoria from producto P inner join Marca M on P.codmarca=M.codmarca inner join Categoria C on P.codcategoria=C.codcategoria where P.codcategoria="+codCat + " order by codproducto";
         try {
             rs=objConectar.consultarBD(strSQL);
             return rs;
@@ -100,17 +100,19 @@ public class clsProducto {
     }
     
     public ResultSet listarProductosPorMarca(int codmar) throws Exception{
-        strSQL="select P.*,M.nommarca, C.nomcategoria from producto P inner join Marca M on P.codmarca=M.codmarca inner join Categoria C on P.codcategoria=C.codcategoria where codmarca="+codmar+" order by codproducto";
+        strSQL="select P.*,M.nommarca, C.nomcategoria from producto P inner join "
+                + " Marca M on P.codmarca=M.codmarca inner join Categoria C on P.codcategoria=C.codcategoria where P.codmarca="+codmar;
         try {
             rs=objConectar.consultarBD(strSQL);
             return rs;
         } catch (Exception e) {
             throw new Exception(e.getMessage() + ": Error al consultar productos.") ;
         }
+        
     }
     
     public ResultSet listarProductosPorFrase(String frs) throws Exception{
-        strSQL="select P.*,M.nommarca, C.nomcategoria from producto P inner join Marca M on P.codmarca=M.codmarca inner join Categoria C on P.codcategoria=C.codcategoria where nomproducto like '%"+ frs +"%' order by codproducto";
+        strSQL="select P.*,M.nommarca , C.nomcategoria from producto P inner join Marca M on P.codmarca=M.codmarca inner join Categoria C on P.codcategoria=C.codcategoria where nomproducto like '"+ frs +"%' order by codproducto";
         try {
             rs=objConectar.consultarBD(strSQL);
             return rs;

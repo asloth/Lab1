@@ -52,9 +52,9 @@ public class clsCliente {
     }
     
     public void registrar(Integer cod, Integer codTipo, String dni, String ruc, String nom, String tel, String cor, String dir, Boolean vig) throws Exception{
-        if (codTipo==1){strSQL="insert into CLIENTE values(" + cod + ",'" + dni + "',null,'" + nom + "','" + tel + "','" + cor + "','" + dir + "'," + vig + "," + codTipo + ")";}
-        if (codTipo==2){strSQL="insert into CLIENTE values(" + cod + ",null,'" + ruc + "','" + nom + "','" + tel + "','" + cor + "','" + dir + "'," + vig + "," + codTipo + ")";}
-        if (codTipo==3){strSQL="insert into CLIENTE values(" + cod + ",'" + dni + "','" + ruc + "','" + nom + "','" + tel + "','" + cor + "','" + dir + "'," + vig + "," + codTipo + ")";}
+        if (codTipo==2){strSQL="insert into CLIENTE values(" + cod + ",'" + dni + "',null,'" + nom + "','" + tel + "','" + cor + "','" + dir + "'," + vig + "," + codTipo + ")";}
+        if (codTipo==3){strSQL="insert into CLIENTE values(" + cod + ",null,'" + ruc + "','" + nom + "','" + tel + "','" + cor + "','" + dir + "'," + vig + "," + codTipo + ")";}
+        if (codTipo==1){strSQL="insert into CLIENTE values(" + cod + ",'" + dni + "','" + ruc + "','" + nom + "','" + tel + "','" + cor + "','" + dir + "'," + vig + "," + codTipo + ")";}
        // strSQL="insert into CLIENTE values(" + cod + ",'" + dni + "','" + ruc + "','" + nom + "','" + tel + "','" + cor + "','" + dir + "'," + vig + "," + codTipo + ")";
         try {
             objConectar.ejecutarBD(strSQL);
@@ -82,6 +82,15 @@ public class clsCliente {
         }
     }
     
+    public void darBajaCliente(Integer cod) throws Exception {
+        strSQL="update CLIENTE set vigencia=false where codCliente=" + cod;
+        try {
+            objConectar.ejecutarBD(strSQL);
+        } catch (Exception e) {
+            throw new Exception("Error al eliminar cliente");
+        }
+    }
+    //esta funcion la creo la profesora no sé para qué
     public ResultSet buscarClienteDniRuc(String cod, Boolean tipo) throws Exception{
         if (tipo){
             strSQL = "select * from CLIENTE C inner join TIPO_CLIENTE T on C.codTipo=T.codTipo where dni='" + cod + "'";
@@ -96,19 +105,27 @@ public class clsCliente {
         }
     }
       
-      public void modificarCliente (Integer cod, String nom,String dni,String ruc,String nombres,String telefono,String correo,String direccion, Boolean vig, Integer codTipo) throws Exception{
-        strSQL="update cliente set ='" + nom + 
-                "', ='" + cod+ 
-                "', =" + nom + 
-                ", =" + dni + 
-                ", =" + ruc + 
-                ", =" + nombres + 
-                ", =" + telefono + 
-                " =" + correo;
-        try {
-            objConectar.ejecutarBD(strSQL);
-        } catch (Exception e) {
-            throw new Exception ("Error al modificar un producto!");
-        }
+    public void modificarCliente (Integer cod, String dni,String ruc,String nombres,String telefono,String correo,String direccion, Boolean vig, Integer codTipo) throws Exception{
+      strSQL="update cliente set " +
+              " nombres='" + nombres + 
+              "', telefono='" + telefono + 
+              "', correo='" + correo + 
+              "', direccion='" + direccion+
+              "', vigencia=" + vig+ 
+              ", codTipo=" + codTipo;
+      if (codTipo == 1){
+          strSQL= strSQL+ " , dni='" + dni + "', ruc='" + ruc + "' where codcliente="+cod;
+      }
+      if (codTipo==2){
+          strSQL= strSQL+ " , dni='" + dni + "' where codcliente="+cod;
+      }
+      if (codTipo==3){
+          strSQL= strSQL+ " , ruc='" + ruc + "' where codcliente="+cod;
+      }
+      try {
+          objConectar.ejecutarBD(strSQL);
+      } catch (Exception e) {
+          throw new Exception ("Error al modificar un producto!");
+      }
     }
 }

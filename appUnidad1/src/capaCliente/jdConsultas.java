@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,6 +32,7 @@ public class jdConsultas extends javax.swing.JDialog {
     public jdConsultas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
 
     /**
@@ -51,6 +53,7 @@ public class jdConsultas extends javax.swing.JDialog {
         txtNombre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         lblCantidadProductos = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -61,6 +64,9 @@ public class jdConsultas extends javax.swing.JDialog {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -98,9 +104,18 @@ public class jdConsultas extends javax.swing.JDialog {
         });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Total de productos:");
+        jLabel5.setText("Total de productos encontrados:");
 
         lblCantidadProductos.setText("-");
+
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salirMarca.png"))); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,11 +125,6 @@ public class jdConsultas extends javax.swing.JDialog {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCantidadProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,12 +133,21 @@ public class jdConsultas extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(cmbMarca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cmbMarca, 0, 161, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(cmbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(127, 127, 127))))
+                        .addGap(127, 127, 127))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblCantidadProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,10 +164,12 @@ public class jdConsultas extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                     .addComponent(txtNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCantidadProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -177,17 +198,6 @@ public class jdConsultas extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         jScrollPane1.setViewportView(tblProductos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -204,7 +214,7 @@ public class jdConsultas extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -234,70 +244,90 @@ public class jdConsultas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        listarCategorias();
-        listarMarcas();
-        try {
-            rsPro=objProducto.listarProductos();
-            lblCantidadProductos.setText(String.valueOf( listarProductos(rsPro) ));
-            cmbCategoria.setSelectedIndex(-1);
-            cmbMarca.setSelectedIndex(-1);
-        } catch (Exception ex) {
-            Logger.getLogger(jdConsultas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         
     }//GEN-LAST:event_formWindowActivated
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        String frase = String.valueOf(txtNombre.getText());
-        if (evt.getKeyChar() == KeyEvent.VK_ENTER){
-            try {
-                rsPro= objProducto.listarProductosPorFrase(frase);
-                lblCantidadProductos.setText(String.valueOf( listarProductos(rsPro) ));
-            } catch (Exception ex) {
-                Logger.getLogger(jdConsultas.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        String frase = txtNombre.getText();
+        try {
+            lblCantidadProductos.setText(String.valueOf( listarProductos( objProducto.listarProductosPorFrase(frase) ) ));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Problemas para buscar");
         }
+        
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
-        try {
-            rsPro= objProducto.listarProductosPorCategoria( objCategoria.obtenerCodigoCategoria(cmbCategoria.getSelectedItem().toString()) );
-            lblCantidadProductos.setText(String.valueOf( listarProductos(rsPro) ));
+        
+        try {    
+            int i = objCategoria.obtenerCodigoCategoria(cmbCategoria.getSelectedItem().toString());
+            if (i != -1){
+                lblCantidadProductos.setText(String.valueOf( listarProductos(  objProducto.listarProductosPorCategoria( i ) ) )); 
+            }else {
+                JOptionPane.showMessageDialog(this, "Categoria no reconocida");
+            }   
+                       
         } catch (Exception e) {
-            
+            JOptionPane.showMessageDialog(this, "Problemas para buscar por categoria");
         }
     }//GEN-LAST:event_cmbCategoriaActionPerformed
 
     private void cmbMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMarcaActionPerformed
         try {
-            rsPro= objProducto.listarProductosPorMarca( objMarca.obtenerCodigoMarca(cmbMarca.getSelectedItem().toString()) );
-            lblCantidadProductos.setText(String.valueOf( listarProductos(rsPro) ));
+            int i = objMarca.obtenerCodigoMarca(cmbMarca.getSelectedItem().toString());
+            if (i != -1){
+                lblCantidadProductos.setText(String.valueOf( listarProductos(  objProducto.listarProductosPorMarca( i ) ) ));
+            }else {
+                JOptionPane.showMessageDialog(this, "Marca no reconocida");
+            }            
         } catch (Exception e) {
-            
+            JOptionPane.showMessageDialog(this, "Problemas para buscar por marca");
         }
     }//GEN-LAST:event_cmbMarcaActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        listarCategorias();
+        listarMarcas();
+        try {
+            rsPro=objProducto.listarProductos();
+            lblCantidadProductos.setText(String.valueOf( listarProductos(rsPro) ));
+        } catch (Exception ex) {
+            Logger.getLogger(jdConsultas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
     private void listarMarcas(){
         ResultSet rsMar = null;
         DefaultComboBoxModel modeloMar = new DefaultComboBoxModel();
-        cmbMarca.setModel(modeloMar);
+        modeloMar.addElement("--Seleccione una marca--");
         try {
             rsMar=objMarca.listarMarca();
             while(rsMar.next()){
-                modeloMar.addElement(rsMar.getString("nomMarca"));
+                modeloMar.addElement(rsMar.getString("nommarca"));
            }
+            cmbMarca.setModel(modeloMar);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Problemas para listar las marcas existentes");
         }
+        
     }
     private void listarCategorias(){
         ResultSet rsCat = null;
         DefaultComboBoxModel modeloCat = new DefaultComboBoxModel();
-        cmbCategoria.setModel(modeloCat);
+        modeloCat.addElement("--Seleccione una categoria--");
         try {
             rsCat=objCategoria.listarCategoria();
             while(rsCat.next()){
-                modeloCat.addElement(rsCat.getString("nomCategoria"));
+                modeloCat.addElement(rsCat.getString("nomcategoria"));
            }
+           cmbCategoria.setModel(modeloCat);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Problemas para listar las categorias existentes");
         }
     }
     
@@ -323,8 +353,8 @@ public class jdConsultas extends javax.swing.JDialog {
                 }else{
                     vigencia="No";
                 }
-                modelo.addRow(new Object[]{rsPro.getInt("codProducto"),
-                    rsPro.getString("nomProducto"),
+                modelo.addRow(new Object[]{rsPro.getInt("codproducto"),
+                    rsPro.getString("nomproducto"),
                     rsPro.getString("descripcion"),
                     rsPro.getFloat("precio"),
                     rsPro.getInt("stock"),
@@ -334,11 +364,12 @@ public class jdConsultas extends javax.swing.JDialog {
            }
             
         } catch (Exception e) {
-            
+            JOptionPane.showMessageDialog(this, "Error al listar productos");
         }
         return i;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbMarca;
     private javax.swing.JLabel jLabel1;

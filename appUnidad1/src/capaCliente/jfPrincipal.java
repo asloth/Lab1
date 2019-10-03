@@ -72,13 +72,13 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        mnuManUsuario = new javax.swing.JMenuItem();
-        mnuMantenimientoMarca = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        mnuUsuario = new javax.swing.JMenuItem();
+        mnuMarca = new javax.swing.JMenuItem();
+        mnuCategoria = new javax.swing.JMenuItem();
+        mnuProducto = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        mnuGestionarCliente = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
@@ -415,37 +415,37 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
 
         jMenu4.setText("Mantenimiento");
 
-        mnuManUsuario.setText("Usuario");
-        mnuManUsuario.addActionListener(new java.awt.event.ActionListener() {
+        mnuUsuario.setText("Usuario");
+        mnuUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuManUsuarioActionPerformed(evt);
+                mnuUsuarioActionPerformed(evt);
             }
         });
-        jMenu4.add(mnuManUsuario);
+        jMenu4.add(mnuUsuario);
 
-        mnuMantenimientoMarca.setText("Marca");
-        mnuMantenimientoMarca.addActionListener(new java.awt.event.ActionListener() {
+        mnuMarca.setText("Marca");
+        mnuMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuMantenimientoMarcaActionPerformed(evt);
+                mnuMarcaActionPerformed(evt);
             }
         });
-        jMenu4.add(mnuMantenimientoMarca);
+        jMenu4.add(mnuMarca);
 
-        jMenuItem6.setText("Categoría");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        mnuCategoria.setText("Categoría");
+        mnuCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                mnuCategoriaActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem6);
+        jMenu4.add(mnuCategoria);
 
-        jMenuItem7.setText("Producto");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        mnuProducto.setText("Producto");
+        mnuProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                mnuProductoActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem7);
+        jMenu4.add(mnuProducto);
 
         jMenuBar1.add(jMenu4);
 
@@ -459,13 +459,13 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         });
         jMenu5.add(jMenuItem8);
 
-        jMenuItem9.setText("Gestionar Cliente");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        mnuGestionarCliente.setText("Gestionar Cliente");
+        mnuGestionarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                mnuGestionarClienteActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem9);
+        jMenu5.add(mnuGestionarCliente);
 
         jMenuItem10.setText("Registrar Venta");
         jMenu5.add(jMenuItem10);
@@ -609,29 +609,29 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         objCambiar.setVisible(true);
     }//GEN-LAST:event_btnCambiarConActionPerformed
 
-    private void mnuMantenimientoMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMantenimientoMarcaActionPerformed
+    private void mnuMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMarcaActionPerformed
         jdMantenimientoMarca objManMarca = new jdMantenimientoMarca(this,true);
         objManMarca.setLocationRelativeTo(this);
         objManMarca.setVisible(true);
-    }//GEN-LAST:event_mnuMantenimientoMarcaActionPerformed
+    }//GEN-LAST:event_mnuMarcaActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void mnuCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCategoriaActionPerformed
         jdMantenimientoCategoria objManCat = new jdMantenimientoCategoria(this,true);
         objManCat.setLocationRelativeTo(this);
         objManCat.setVisible(true);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_mnuCategoriaActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void mnuProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProductoActionPerformed
         jdManProducto objManProd = new jdManProducto(this,true);
         objManProd.setLocationRelativeTo(this);
         objManProd.setVisible(true);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_mnuProductoActionPerformed
 
-    private void mnuManUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuManUsuarioActionPerformed
+    private void mnuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuUsuarioActionPerformed
         jdMantenimientoUsuario objManUser = new jdMantenimientoUsuario(this,true);
         objManUser.setLocationRelativeTo(this);
         objManUser.setVisible(true);
-    }//GEN-LAST:event_mnuManUsuarioActionPerformed
+    }//GEN-LAST:event_mnuUsuarioActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         jdConsultas obj = new jdConsultas(this,true);
@@ -639,11 +639,11 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
         obj.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void mnuGestionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuGestionarClienteActionPerformed
         jdMantenimientoCliente obj = new jdMantenimientoCliente(this,true);
         obj.setLocationRelativeTo(this);
         obj.setVisible(true);
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }//GEN-LAST:event_mnuGestionarClienteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JButton btnCambiarCon;
@@ -679,10 +679,7 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel3;
@@ -699,8 +696,11 @@ public class jfPrincipal extends javax.swing.JFrame implements Runnable {
     public static javax.swing.JLabel lblInicioSesion;
     private javax.swing.JLabel lblNumIngreso;
     private javax.swing.JLabel lblUsuarioActivo;
-    private static javax.swing.JMenuItem mnuManUsuario;
-    private javax.swing.JMenuItem mnuMantenimientoMarca;
+    private javax.swing.JMenuItem mnuCategoria;
+    private javax.swing.JMenuItem mnuGestionarCliente;
+    private javax.swing.JMenuItem mnuMarca;
+    private javax.swing.JMenuItem mnuProducto;
+    private static javax.swing.JMenuItem mnuUsuario;
     // End of variables declaration//GEN-END:variables
 
 }
